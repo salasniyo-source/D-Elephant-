@@ -3,56 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>D-Elephant Music</title>
+<title>D‑Elephant Music</title>
 
 <style>
 body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#0f172a;color:white}
 
-header{display:flex;justify-content:space-between;align-items:center;padding:18px 30px;background:#020617;position:sticky;top:0;z-index:10;border-bottom:1px solid #1e293b}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 30px;background:#020617;border-bottom:1px solid #1e293b}
 header h1{margin:0;font-size:24px;color:#38bdf8}
 nav a{margin-left:20px;text-decoration:none;color:#e2e8f0;font-size:14px}
-nav a:hover{color:#38bdf8}
 
-.hero{height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;background:linear-gradient(rgba(2,6,23,.75),rgba(2,6,23,.9)),url('https://images.unsplash.com/photo-1511379938547-c1f69419868d');background-size:cover;background-position:center;border-bottom:1px solid #1e293b}
-.hero h2{font-size:48px;margin-bottom:10px}
-.hero p{max-width:600px;color:#cbd5f5;font-size:18px}
-.hero button{margin-top:20px;padding:12px 25px;font-size:16px;background:#38bdf8;border:none;border-radius:8px;cursor:pointer;color:#020617}
+.hero{height:60vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(rgba(2,6,23,.7),rgba(2,6,23,.9)),url('https://images.unsplash.com/photo-1511379938547-c1f69419868d');background-size:cover;background-position:center}
+.hero h2{font-size:46px;margin:0}
+.hero p{color:#cbd5f5}
 
-.container{max-width:1200px;margin:auto;padding:40px 25px}
-.sectionTitle{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.container{max-width:1100px;margin:auto;padding:40px 20px}
 
-.carousel{display:flex;overflow-x:auto;gap:20px;padding-bottom:10px}
+.carousel{display:flex;overflow-x:auto;gap:20px}
 .carousel::-webkit-scrollbar{display:none}
 
-.card{min-width:240px;background:#020617;border-radius:14px;padding:15px;box-shadow:0 10px 25px rgba(0,0,0,.5);transition:.35s}
-.card:hover{transform:translateY(-6px) scale(1.03)}
-
+.card{min-width:240px;background:#020617;border-radius:12px;padding:15px;box-shadow:0 10px 25px rgba(0,0,0,.5)}
 .card img{width:100%;height:180px;object-fit:cover;border-radius:10px}
-.card h3{margin:12px 0 4px;font-size:16px}
+.card h3{margin:10px 0 4px}
 .card p{margin:0;font-size:13px;color:#94a3b8}
 
-.actions{display:flex;justify-content:space-between;margin-top:8px;font-size:13px}
-
-button{border:none;padding:6px 10px;border-radius:6px;background:#2563eb;color:white;cursor:pointer}
-
-.comments{margin-top:8px;font-size:12px}
-.comments input{width:100%;margin-top:5px;padding:6px;border-radius:5px;border:none}
+button{border:none;padding:7px 12px;border-radius:6px;background:#2563eb;color:white;margin-top:6px}
 
 .upload{background:#020617;padding:25px;border-radius:12px}
 .upload input{width:100%;padding:10px;margin-top:10px;border-radius:6px;border:none}
 
-.dashboard{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+footer{text-align:center;padding:20px;background:#020617;margin-top:40px;color:#94a3b8}
 
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:40px}
-.statCard{background:#020617;padding:25px;border-radius:12px;text-align:center}
-.statCard h3{margin:0;font-size:30px;color:#38bdf8}
-
-.featured{display:flex;overflow-x:auto;gap:20px;margin-bottom:30px}
-.albumGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px}
-
-footer{text-align:center;padding:25px;background:#020617;margin-top:40px;font-size:13px;color:#94a3b8}
-
-#musicPlayer{position:fixed;bottom:0;left:0;width:100%;background:#020617;border-top:1px solid #1e293b;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;z-index:20}
+#musicPlayer{position:fixed;bottom:0;left:0;width:100%;background:#020617;border-top:1px solid #1e293b;padding:10px 20px;display:flex;align-items:center;justify-content:space-between}
 
 </style>
 </head>
@@ -60,66 +41,45 @@ footer{text-align:center;padding:25px;background:#020617;margin-top:40px;font-si
 <body>
 
 <header>
-<h1>D-Elephant</h1>
+<h1>D‑Elephant</h1>
 <nav>
 <a href="#">Home</a>
 <a href="#upload">Upload</a>
-<a href="#albums">Albums</a>
-<a href="#artists">Artists</a>
 </nav>
 </header>
 
 <section class="hero">
-<h2>D-Elephant Music</h2>
-<p>Stream music, discover artists and upload your own songs.</p>
-<button onclick="document.getElementById('upload').scrollIntoView({behavior:'smooth'})">Upload Music</button>
+<h2>D‑Elephant Music</h2>
+<p>Upload and stream your music.</p>
 </section>
 
 <div class="container">
-
-<div class="stats">
-<div class="statCard"><h3 id="songCount">0</h3><p>Songs</p></div>
-<div class="statCard"><h3 id="playCount">0</h3><p>Plays</p></div>
-<div class="statCard"><h3 id="artistCount">0</h3><p>Artists</p></div>
-</div>
-
-<input id="search" oninput="renderSongs()" placeholder="Search song or artist" style="width:100%;padding:12px;border-radius:8px;border:none;margin-bottom:20px">
-
-<div class="sectionTitle"><h2>⭐ Featured Music</h2></div>
-<div id="featured" class="featured"></div>
-
-<div class="sectionTitle"><h2>Trending Songs</h2></div>
+<h2>Trending Songs</h2>
 <div id="songList" class="carousel"></div>
-
-</div>
-
-<div class="container" id="albums">
-<h2>Albums</h2>
-<div id="albumList" class="albumGrid"></div>
-</div>
-
-<div class="container" id="artists">
-<h2>Artists</h2>
-<div id="artistList"></div>
 </div>
 
 <div class="container" id="upload">
 <h2>Upload Song</h2>
 <div class="upload">
+
 <input id="title" placeholder="Song title">
-<input id="artist" placeholder="Artist name">
-<input id="album" placeholder="Album name (optional)">
-<input id="cover" placeholder="Cover image URL">
+
+<label style="font-size:14px">Choose cover image</label>
+<input id="cover" type="file" accept="image/*">
+
+<label style="font-size:14px">Select song file</label>
 <input id="file" type="file" accept="audio/*">
-<button onclick="uploadSong()" style="margin-top:10px">Upload Song</button>
+
+<button onclick="uploadSong()">Upload Song</button>
+
 </div>
 </div>
 
-<footer>© 2026 D-Elephant Music Platform</footer>
+<footer>© 2026 D‑Elephant</footer>
 
 <div id="musicPlayer">
 <div id="nowPlaying">No song playing</div>
-<audio id="player" controls style="width:55%"></audio>
+<audio id="player" controls style="width:60%"></audio>
 </div>
 
 <script>
@@ -127,40 +87,55 @@ footer{text-align:center;padding:25px;background:#020617;margin-top:40px;font-si
 let songs = JSON.parse(localStorage.getItem("delephantSongs")) || []
 
 function saveSongs(){
-localStorage.setItem("delephantSongs",JSON.stringify(songs))
+localStorage.setItem("delephantSongs", JSON.stringify(songs))
 }
 
 function uploadSong(){
 
-const title=document.getElementById("title").value
-const artist=document.getElementById("artist").value
-const album=document.getElementById("album").value
-const cover=document.getElementById("cover").value
-const fileInput=document.getElementById("file")
+const title = document.getElementById("title").value
+const fileInput = document.getElementById("file")
+const coverInput = document.getElementById("cover")
 
-if(!fileInput.files[0]) return alert("Select MP3 file")
+if(!title) return alert("Enter song title")
+if(!fileInput.files[0]) return alert("Select song file")
 
-const reader=new FileReader()
+const songReader = new FileReader()
 
-reader.onload=function(e){
+songReader.onload = function(e){
+
+const songData = e.target.result
+
+if(coverInput.files[0]){
+
+const coverReader = new FileReader()
+
+coverReader.onload = function(ev){
+addSong(title, songData, ev.target.result)
+}
+
+coverReader.readAsDataURL(coverInput.files[0])
+
+}else{
+addSong(title, songData, "")
+}
+
+}
+
+songReader.readAsDataURL(fileInput.files[0])
+
+}
+
+function addSong(title, file, cover){
 
 songs.unshift({
- title,
- artist,
- album,
- cover,
- file:e.target.result,
- plays:0,
- likes:0,
- comments:[]
+ title:title,
+ file:file,
+ cover:cover,
+ plays:0
 })
 
 saveSongs()
 renderSongs()
-
-}
-
-reader.readAsDataURL(fileInput.files[0])
 
 }
 
@@ -168,20 +143,13 @@ function playSong(i){
 
 songs[i].plays++
 
-const player=document.getElementById("player")
-player.src=songs[i].file
+const player = document.getElementById("player")
+player.src = songs[i].file
 player.play()
 
-nowPlaying.innerText="Now Playing: "+songs[i].title+" - "+songs[i].artist
+const now = document.getElementById("nowPlaying")
+now.innerText = "Now Playing: " + songs[i].title
 
-saveSongs()
-renderSongs()
-
-}
-
-function likeSong(i){
-
-songs[i].likes++
 saveSongs()
 renderSongs()
 
@@ -189,99 +157,70 @@ renderSongs()
 
 function renderSongs(){
 
-const list=document.getElementById("songList")
-const search=document.getElementById("search").value.toLowerCase()
+const list = document.getElementById("songList")
+list.innerHTML = ""
 
-list.innerHTML=""
+songs.forEach((song,i)=>{
 
-let filtered=songs.filter(s=>
- s.title.toLowerCase().includes(search) ||
- (s.artist||"").toLowerCase().includes(search)
-)
+const shareLink = window.location.href + "#song-" + i
 
-filtered.forEach((song,i)=>{
-
-const card=`
-<div class="card">
+const card = `
+<div class="card" id="song-${i}">
 <img src="${song.cover || 'https://picsum.photos/300?random='+i}">
 <h3>${song.title}</h3>
-<p>${song.artist}</p>
+<p>▶ ${song.plays} plays</p>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
 <button onclick="playSong(${i})">▶ Play</button>
-<div class="actions">
-<span>▶ ${song.plays}</span>
-<button onclick="likeSong(${i})">❤️ ${song.likes}</button>
+<button onclick="likeSong(${i})">❤️ ${song.likes||0}</button>
+<a href="${song.file}" download><button>⬇ Download</button></a>
+<button onclick="shareSong('${shareLink}')">🔗 Share</button>
 </div>
+
+<div style="margin-top:8px">
+<input placeholder="Write comment" onkeydown="addComment(event,${i})" style="width:100%;padding:6px;border-radius:6px;border:none">
+<div style="font-size:12px;margin-top:5px">${(song.comments||[]).map(c=>`💬 ${c}`).join("<br>")}</div>
+</div>
+
 </div>`
 
-list.innerHTML+=card
+list.innerHTML += card
 
 })
 
-renderFeatured()
-renderArtists()
-renderAlbums()
-updateStats()
+}
+
+function likeSong(i){
+
+if(!songs[i].likes) songs[i].likes = 0
+songs[i].likes++
+
+saveSongs()
+renderSongs()
 
 }
 
-function renderFeatured(){
+function addComment(e,i){
 
-const box=document.getElementById("featured")
+if(e.key === "Enter"){
 
-let latest=[...songs].slice(0,5)
+if(!songs[i].comments) songs[i].comments = []
 
-box.innerHTML=latest.map((s,i)=>`
-<div class="card" style="min-width:260px">
-<img src="${s.cover || 'https://picsum.photos/300?random='+i}">
-<h3>${s.title}</h3>
-<p>${s.artist}</p>
-<button onclick="playSong(${songs.indexOf(s)})">▶ Play</button>
-</div>
-`).join("")
+songs[i].comments.push(e.target.value)
+
+e.target.value = ""
+
+saveSongs()
+renderSongs()
 
 }
 
-function renderArtists(){
-
-const artists={}
-
-songs.forEach(s=>{
-if(!artists[s.artist]) artists[s.artist]=0
-artists[s.artist]++
-})
-
-artistCount.innerText=Object.keys(artists).length
-
-artistList.innerHTML=Object.keys(artists).map(a=>`🎤 <b>${a}</b> (${artists[a]} songs)<br>`).join("")
-
 }
 
-function renderAlbums(){
+function shareSong(link){
 
-const albums={}
-
-songs.forEach(s=>{
-if(!s.album) return
-if(!albums[s.album]) albums[s.album]=[]
-albums[s.album].push(s)
-})
-
-albumList.innerHTML=Object.keys(albums).map(a=>`
-<div class="card">
-<h3>${a}</h3>
-<p>${albums[a].length} songs</p>
-</div>
-`).join("")
-
-}
-
-function updateStats(){
-
-let plays=0
-songs.forEach(s=>plays+=s.plays)
-
-songCount.innerText=songs.length
-playCount.innerText=plays
+navigator.clipboard.writeText(link)
+alert("Song link copied. You can paste it anywhere.")
 
 }
 
