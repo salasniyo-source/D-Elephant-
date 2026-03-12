@@ -1,0 +1,261 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D-Elephant Music</title>
+
+<style>
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#0f172a;color:white}
+
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 30px;background:#020617;position:sticky;top:0;z-index:10;border-bottom:1px solid #1e293b}
+header h1{margin:0;font-size:24px;color:#38bdf8;letter-spacing:1px}
+nav a{margin-left:20px;text-decoration:none;color:#e2e8f0;font-size:14px}
+nav a:hover{color:#38bdf8}
+
+.hero{
+height:75vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+background:linear-gradient(rgba(2,6,23,.75),rgba(2,6,23,.9)),url('https://images.unsplash.com/photo-1511379938547-c1f69419868d');
+background-size:cover;
+background-position:center;
+border-bottom:1px solid #1e293b
+}
+
+.hero button{
+margin-top:20px;
+padding:12px 25px;
+font-size:16px;
+background:#38bdf8;
+border:none;
+border-radius:8px;
+cursor:pointer;
+color:#020617
+}
+
+.container{max-width:1200px;margin:auto;padding:40px 25px}
+
+.carousel{
+display:flex;
+overflow-x:auto;
+gap:20px;
+padding-bottom:10px;
+scroll-behavior:smooth
+}
+
+.card{
+min-width:240px;
+background:#020617;
+border-radius:14px;
+padding:15px;
+box-shadow:0 10px 25px rgba(0,0,0,.5);
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:10px
+}
+
+.card h3{margin:12px 0 4px;font-size:16px}
+.card p{margin:0;font-size:13px;color:#94a3b8}
+
+.actions{
+display:flex;
+justify-content:space-between;
+margin-top:8px
+}
+
+button{
+border:none;
+padding:6px 10px;
+border-radius:6px;
+background:#2563eb;
+color:white;
+cursor:pointer
+}
+
+.comments{margin-top:8px;font-size:12px}
+.comments input{width:100%;margin-top:5px;padding:6px;border-radius:5px;border:none}
+
+.upload{
+background:#020617;
+padding:25px;
+border-radius:12px;
+}
+
+.upload input{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:6px;
+border:none
+}
+
+.dashboard{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+gap:20px
+}
+
+footer{
+text-align:center;
+padding:25px;
+background:#020617;
+margin-top:40px;
+font-size:13px;
+color:#94a3b8
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>D-Elephant</h1>
+<nav>
+<a href="#">Home</a>
+<a href="#upload">Upload</a>
+<a href="#dashboard">My Songs</a>
+</nav>
+</header>
+
+<section class="hero">
+
+<h2 style="font-size:48px">D-Elephant Music</h2>
+
+<p style="max-width:650px;font-size:18px;color:#cbd5f5">
+Discover new sounds, upload your songs and build your fanbase on the next generation African music platform.
+</p>
+
+<button onclick="document.getElementById('upload').scrollIntoView({behavior:'smooth'})">Upload Music</button>
+
+</section>
+
+<div class="container">
+
+<h2>Trending Songs</h2>
+
+<div class="carousel" id="songList"></div>
+
+</div>
+
+<div class="container" id="upload">
+<h2>Upload New Song</h2>
+<div class="upload">
+<input id="title" placeholder="Song title">
+<input id="artist" placeholder="Artist name">
+<input id="file" placeholder="MP3 file URL">
+<button onclick="uploadSong()" style="margin-top:10px">Upload Song</button>
+</div>
+</div>
+
+<div class="container" id="dashboard">
+<h2>My Uploaded Songs</h2>
+<div class="dashboard" id="mySongs"></div>
+</div>
+
+<footer>
+© 2026 D-Elephant Music Platform
+</footer>
+
+<script>
+
+let songs = JSON.parse(localStorage.getItem("delephantSongs")) || []
+
+function saveSongs(){
+localStorage.setItem("delephantSongs",JSON.stringify(songs))
+}
+
+function renderSongs(){
+
+const list=document.getElementById("songList")
+const my=document.getElementById("mySongs")
+
+list.innerHTML=""
+my.innerHTML=""
+
+songs.forEach((song,i)=>{
+
+const card=`
+<div class="card">
+<img src="https://picsum.photos/300?random=${i}">
+<h3>${song.title}</h3>
+<p>${song.artist}</p>
+<audio controls src="${song.file}" style="width:100%"></audio>
+
+<div class="actions">
+<button onclick="react(${i})">🔥 ${song.reacts}</button>
+<a href="${song.file}" download><button>⬇</button></a>
+</div>
+
+<div class="comments">
+${song.comments.map(c=>`<div>💬 ${c}</div>`).join("")}
+<input placeholder="Write comment" onkeydown="comment(event,${i})">
+</div>
+</div>
+`
+
+list.innerHTML+=card
+my.innerHTML+=card
+
+})
+
+}
+
+function uploadSong(){
+
+const title=document.getElementById("title").value
+const artist=document.getElementById("artist").value
+const file=document.getElementById("file").value
+
+if(!title || !file) return alert("Add song title and file")
+
+songs.unshift({
+ title,
+ artist,
+ file,
+ reacts:0,
+ comments:[]
+})
+
+saveSongs()
+renderSongs()
+
+}
+
+function react(i){
+
+songs[i].reacts++
+saveSongs()
+renderSongs()
+
+}
+
+function comment(e,i){
+
+if(e.key==="Enter"){
+
+songs[i].comments.push(e.target.value)
+e.target.value=""
+saveSongs()
+renderSongs()
+
+}
+
+}
+
+renderSongs()
+
+</script>
+
+</body>
+</html>
+```
